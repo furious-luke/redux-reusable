@@ -158,6 +158,7 @@ export function asyncHandler( key, actionTypes, reducer ) {
             return {
                 ...state,
                 [ key ]: (reducer ? reducer : x => x)( action.results, action ),
+                [ key + 'Error' ]: undefined,
                 [ key + 'Loading' ]: false
             };
         },
@@ -165,7 +166,7 @@ export function asyncHandler( key, actionTypes, reducer ) {
         [ actionTypes.FAILURE ]( state, action ) {
             return {
                 ...state,
-                error: state.error,
+                [ key + 'Error' ]: action.error,
                 [ key + 'Loading' ]: false
             };
         }
