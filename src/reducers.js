@@ -39,8 +39,10 @@ export function createReducer( handlers, initialState = {} ) {
     if( count == 0 )
       subreducers = undefined;
   }
-  else
+  else if( handlers !== undefined )
     subreducers = handlers.SUBREDUCERS;
+  else
+    subreducers = undefined;
 
   // Handlers can be an array, indicating we want to merge a bunch of
   // handlers together.

@@ -59,6 +59,14 @@ describe( 'actions', function() {
 
 describe( 'reducers', function() {
 
+  describe( 'createReducer', function() {
+
+    it( 'accepts no handlers', function() {
+      let root = createReducer();
+      assert.notEqual( root, undefined );
+    });
+  });
+
   describe( 'modelArrayHandler', function() {
     const array = [
       { id: 10, val: 100 },
