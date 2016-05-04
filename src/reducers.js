@@ -12,8 +12,10 @@ function checkOverlappingHandlers( handlers ) {
       all = union( all, cur );
       count += cur.length;
     }
-    if( all.length != count )
+    if( all.size != count ) {
+      console.error( all, all.length, count );
       throw 'Overlapping handlers.';
+    }
   }
 }
 

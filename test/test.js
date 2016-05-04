@@ -1,6 +1,5 @@
 import assert from 'assert'
-import { asyncAction } from '../src/actions'
-import { createReducer, modelArrayHandler } from '../src/reducers'
+import { asyncAction, createReducer, modelArrayHandler } from '../src'
 
 describe( 'actions', function() {
 

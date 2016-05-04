@@ -1,2 +1,3 @@
-export { createReducer, toObjectMap, toIndexMap, objectListHandler, asyncHandler, arrayHandler } from './reducers';
+export { createReducer, createArrayReducer, toObjectMap, toIndexMap, objectListHandler,
+         asyncHandler, arrayHandler, modelArrayHandler } from './reducers';
 export { asyncAction, handle, bindActionCreators } from './actions';
