@@ -30,7 +30,10 @@ export function asyncAction( name, action, opts = {} ) {
         },
         error => dispatch({
           type: types.FAILURE,
-          error,
+          error: {
+            status: error.status,
+            errors: error.responseJSON
+          },
           ...failureArgs,
           ...args
         }),

@@ -13,7 +13,7 @@ function checkOverlappingHandlers( handlers ) {
       count += cur.length;
     }
     if( all.size != count ) {
-      console.error( all, all.length, count );
+      console.log( all, all.size, count );
       throw 'Overlapping handlers.';
     }
   }
@@ -228,7 +228,7 @@ export function asyncHandler( key, actionTypes, reducer ) {
     [ actionTypes.SUCCESS ]( state, action ) {
       return {
         ...state,
-        [ key ]: (reducer ? reducer : ( x, y ) => y.results)( state[key], action ),
+        [ key ]: (reducer ? reducer : ( x, y ) => x)( action.results, action ),  // TODO: Pass in old state?
         [ key + 'Error' ]: undefined,
         [ key + 'Loading' ]: false
       };
