@@ -214,6 +214,15 @@ export function modelArrayHandler( types, modelReducer, indexKey = 'index', idKe
   return handler;
 }
 
+export function asyncSuccess( state, action, key, reducer ) {
+  return {
+    ...state,
+    [ key ]: (reducer ? reducer : ( x, y ) => x)( action.results, action ),  // TODO: Pass in old state?
+    [ key + 'Error' ]: undefined,
+    [ key + 'Loading' ]: false
+  };
+}
+
 // A handler for async actions.
 export function asyncHandler( key, actionTypes, reducer ) {
   let handlers = {
@@ -226,12 +235,7 @@ export function asyncHandler( key, actionTypes, reducer ) {
     },
 
     [ actionTypes.SUCCESS ]( state, action ) {
-      return {
-        ...state,
-        [ key ]: (reducer ? reducer : ( x, y ) => x)( action.results, action ),  // TODO: Pass in old state?
-        [ key + 'Error' ]: undefined,
-        [ key + 'Loading' ]: false
-      };
+      return asyncSuccess( state, action, key, reducer );
     },
 
     [ actionTypes.FAILURE ]( state, action ) {
