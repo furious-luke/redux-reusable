@@ -152,6 +152,17 @@ export function arrayHandler( itemReducer, indexKey = 'index' ) {
   };
 }
 
+export function toModelArray( objects, idKey = 'id' ) {
+  let obj = {
+    objects,
+    map: toIndexMap( objects, idKey )
+  };
+  let get = function( id ) { return this.objects[this.map[id]]; }
+  get.bind( obj );
+  obj.get = get;
+  return obj;
+}
+
 // Manages an array of objects each of which has a unique identifier.
 // Tracks the objects in an object with an array and a mapping.
 export function modelArrayHandler( types, modelReducer, indexKey = 'index', idKey = 'id' ) {
@@ -161,14 +172,7 @@ export function modelArrayHandler( types, modelReducer, indexKey = 'index', idKe
   let handler = {
 
     [ types.init ]( state = [], action ) {
-      let obj = {
-        objects: action.results,
-        map: toIndexMap( action.results, idKey )
-      };
-      let get = function( id ) { return this.objects[this.map[id]]; }
-      get.bind( obj );
-      obj.get = get;
-      return obj;
+      return toModelArray( action.results, idKey );
     },
 
     DEFAULT( state = {}, action ) {
