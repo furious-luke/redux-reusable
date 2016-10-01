@@ -1,6 +1,6 @@
 {
   "name": "redux-reusable",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A small suite of utilities to assist in creating reusable Redux applications.",
   "main": "lib/index.js",
   "scripts": {
