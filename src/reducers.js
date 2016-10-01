@@ -205,7 +205,7 @@ export function modelArrayHandler( types, modelReducer, indexKey = 'index', idKe
         if( index === undefined )
           index = newObjects.length;
 
-        newObjects[index] = modelReducer( newObj, action );
+        newObjects[index] = modelReducer ? modelReducer( newObj, action ) : newObj;
         newMap[id] = index;
       });
 
