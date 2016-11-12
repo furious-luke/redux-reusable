@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { union } from './sets'
+import { union, difference } from './sets'
 
 // Check for handlers that have overlapping keys.
 // TODO: Throw a more useful error.
@@ -8,9 +8,9 @@ function checkOverlappingHandlers( handlers ) {
     let all = new Set( Object.keys( handlers[0] ) );
     let count = all.size;
     for( var ii = 1; ii < handlers.length; ++ii ) {
-      let cur = Object.keys( handlers[ii] );
+      let cur = difference( new Set( Object.keys( handlers[ii] ) ), new Set([ 'SUBREDUCERS' ]) );
       all = union( all, cur );
-      count += cur.length;
+      count += cur.size;
     }
     if( all.size != count ) {
       console.log( all, all.size, count );
